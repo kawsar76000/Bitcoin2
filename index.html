@@ -19,7 +19,10 @@
         .nav-actions { position: absolute; left: 50px; top: 85px; display: flex; gap: 30px; }
         .nav-link { font-size: 10px; letter-spacing: 4px; font-weight: bold; border-bottom: 1px solid var(--black); cursor: pointer; transition: 0.3s; background: none; border-top:none; border-left:none; border-right:none; font-family: inherit; text-transform:uppercase; padding:0 0 3px 0; color: var(--black); text-decoration: none;}
         .nav-link:hover { color: var(--gold); border-color: var(--gold); }
+        
+        /* সাপোর্ট লিংকটি নেভবার থেকে সরিয়ে নিচে নেওয়া হয়েছে */
         .portal-link { position: absolute; right: 50px; top: 85px; font-size: 10px; letter-spacing: 4px; font-weight: bold; text-decoration: none; color: black; border-bottom: 1px solid var(--black); transition:0.3s;}
+        .portal-link:hover { color: var(--gold); border-color: var(--gold); }
 
         .rr-logo-container { position: relative; width: 50px; height: 60px; }
         .k-char { font-size: 55px; font-weight: 900; position: absolute; color: var(--black); line-height: 1; }
@@ -48,14 +51,46 @@
         .step-text { font-size: 11px; letter-spacing: 1px; color: #555; }
         .copyright { grid-column: 1 / -1; margin-top: 80px; font-size: 10px; letter-spacing: 4px; opacity: 0.6; text-align: center; border-top: 1px solid #fafafa; padding-top: 40px; }
 
+        /* ========================================== */
+        /* নতুন সাপোর্ট সিস্টেম (Floating Widget) */
+        /* ========================================== */
+        .support-widget { position: fixed; bottom: 40px; right: 40px; z-index: 5000; display: flex; flex-direction: column; align-items: center; }
+        
+        .support-btn-main { 
+            width: 60px; height: 60px; background: var(--black); border: 1px solid var(--gold); border-radius: 50%; 
+            display: flex; justify-content: center; align-items: center; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+        }
+        .support-btn-main:hover { transform: scale(1.05); background: var(--gold); }
+        .support-btn-main svg { width: 30px; height: 30px; fill: var(--white); transition: 0.3s; }
+        .support-btn-main:hover svg { fill: var(--black); }
+        .support-text { font-size: 10px; letter-spacing: 2px; font-weight: bold; margin-top: 8px; text-transform: uppercase; color: var(--black); background: var(--white); padding: 3px 8px; border: 1px solid #eee; border-radius: 4px; }
+
+        .support-menu { display: none; flex-direction: column; gap: 10px; margin-bottom: 15px; align-items: center; }
+        .support-menu.active { display: flex; animation: slideUp 0.3s ease; }
+        
+        .support-item { 
+            background: var(--white); border: 1px solid var(--black); padding: 12px 20px; border-radius: 30px;
+            text-decoration: none; color: var(--black); font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; 
+            display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: 0.3s; cursor: pointer;
+            font-family: 'Times New Roman', serif;
+        }
+        .support-item:hover { background: var(--gold); border-color: var(--gold); }
+        .support-item svg { width: 16px; height: 16px; fill: var(--black); }
+
+        .tg-submenu { display: none; flex-direction: column; gap: 8px; }
+        .tg-submenu.active { display: flex; animation: fadeIn 0.3s ease; }
+        
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
         @media (max-width: 768px) {
             .nav-bar { height: 140px; }
             .nav-actions { left: 20px; top: 60px; gap: 15px; }
             .nav-link, .portal-link { font-size: 8px; letter-spacing: 2px; }
-            .portal-link { right: 20px; top: 60px; }
             .title { font-size: 20px; letter-spacing: 8px; }
             .footer { grid-template-columns: 1fr; padding: 60px 5%; }
             .footer-right { border-left: none; padding-left: 0; border-top: 1px solid #eee; padding-top: 40px; }
+            .support-widget { bottom: 20px; right: 20px; }
         }
     </style>
 </head>
@@ -69,7 +104,8 @@
             <a href="dashboard.html" class="nav-link">LOGIN</a>
             <a href="order.html" class="nav-link">ACQUISITION</a>
         </div>
-        <a href="support.html" class="portal-link">SUPPORT</a>
+        
+        <!-- নেভবারের সাপোর্ট লিংক সরিয়ে নিচে ওয়েজেট দেওয়া হয়েছে -->
         
         <div class="rr-logo-container">
             <span class="k-char k-front">S</span>
@@ -122,7 +158,6 @@
         </div>
     </section>
 
-    <!-- ক্লিন ফুটার -->
     <footer class="footer">
         <div class="footer-left reveal">
             <h3>ESTATE GOVERNANCE</h3>
@@ -135,9 +170,50 @@
             <div class="step-box"><span class="step-num">01</span><span class="step-text">Complete payment via the Deposit Drawer.</span></div>
             <div class="step-box"><span class="step-num">02</span><span class="step-text">Submit Transaction ID to Telegram Support.</span></div>
             <div class="step-box"><span class="step-num">03</span><span class="step-text">Live sync completed within 24 hours post-approval.</span></div>
+            <div class="step-box" style="margin-top: 30px;">
+                <!-- এডমিন প্যানেলে ঢোকার হিডেন লিংক -->
+                <a href="admin.html" style="font-size: 10px; color: #888; text-decoration: none;">Admin Access</a>
+            </div>
         </div>
         <div class="copyright">© 2026 SATOSHI. OWNED BY <b>SATOSHI</b>. ALL RIGHTS RESERVED.</div>
     </footer>
+
+    <!-- ========================================== -->
+    <!-- নতুন ফ্লোটিং সাপোর্ট সিস্টেম -->
+    <!-- ========================================== -->
+    <div class="support-widget">
+        <div class="support-menu" id="support-menu">
+            
+            <!-- ইমেইল অপশন -->
+            <a href="mailto:zoomlink34@gmail.com" class="support-item">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                Email Us
+            </a>
+            
+            <!-- টেলিগ্রাম অপশন -->
+            <div class="support-item" onclick="toggleTelegramMenu(event)">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.35-.49.96-.75 3.77-1.64 6.28-2.73 7.53-3.26 3.59-1.49 4.33-1.75 4.82-1.76.11 0 .35.03.5.15.13.12.17.29.19.42.02.08.02.28.01.44z"/></svg>
+                Telegram
+            </div>
+
+            <!-- টেলিগ্রাম সাব-মেনু (গ্রুপ ও চ্যানেল) -->
+            <div class="tg-submenu" id="tg-submenu">
+                <a href="https://t.me/SpiderStaffingAgencyB" target="_blank" class="support-item" style="background: #f0f8ff; border-color: #0088cc; color: #0088cc;">
+                    Telegram Channel
+                </a>
+                <a href="https://t.me/SpiderStaffingAgencyBTC" target="_blank" class="support-item" style="background: #f0f8ff; border-color: #0088cc; color: #0088cc;">
+                    Telegram Group
+                </a>
+            </div>
+
+        </div>
+
+        <!-- মেইন সাপোর্ট বাটন -->
+        <button class="support-btn-main" onclick="toggleSupportMenu()">
+            <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/></svg>
+        </button>
+        <span class="support-text">SUPPORT</span>
+    </div>
 
     <script>
         const outline = document.getElementById('cursor-outline');
@@ -149,6 +225,24 @@
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // সাপোর্ট মেনু ওপেন/ক্লোজ
+        function toggleSupportMenu() {
+            const menu = document.getElementById('support-menu');
+            menu.classList.toggle('active');
+            
+            // মেনু বন্ধ করলে সাব-মেনুও বন্ধ হবে
+            if(!menu.classList.contains('active')) {
+                document.getElementById('tg-submenu').classList.remove('active');
+            }
+        }
+
+        // টেলিগ্রাম সাব-মেনু ওপেন/ক্লোজ
+        function toggleTelegramMenu(event) {
+            event.stopPropagation(); // মেইন মেনু বন্ধ হওয়া আটকাতে
+            const submenu = document.getElementById('tg-submenu');
+            submenu.classList.toggle('active');
+        }
     </script>
 </body>
 </html>
